@@ -1,0 +1,82 @@
+version: "3.1"
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
+intents:
+  - goodbye
+  - greet
+  - query_knowledge_base:
+      use_entities: [ ]
+  - play_song
+  - play_album
+entities:
+  - object_type
+  - mention
+  - attribute
+  - object-type
+  - song
+  - singer
+  - gender
+slots:
+  attribute:
+    type: any
+    mappings:
+    - type: from_entity
+      entity: attribute
+  gender:
+    type: any
+    mappings:
+    - type: from_entity
+      entity: gender
+  knowledge_base_last_object:
+    type: any
+    mappings:
+    - type: from_text
+  knowledge_base_last_object_type:
+    type: any
+    mappings:
+    - type: from_text
+  knowledge_base_listed_objects:
+    type: any
+    mappings:
+    - type: from_text
+  knowledge_base_objects:
+    type: any
+    mappings:
+    - type: from_text
+  mention:
+    type: any
+    mappings:
+    - type: from_entity
+      entity: mention
+  object_type:
+    type: any
+    mappings:
+    - type: from_entity
+      entity: object_type
+  singer:
+    type: any
+    mappings:
+    - type: from_entity
+      entity: singer
+  song:
+    type: any
+    mappings:
+    - type: from_entity
+      entity: song
+responses:
+  utter_greet:
+    - text: Hello, I’m Silly, a bot that can use knowledge graphs to help you look up singers, music, and albums.
+  utter_goodbye:
+    - text: Goodbye！
+  utter_default:
+    - text: The system does not understand what you are saying.
+  utter_ask_rephrase:
+    - text: Sorry that the system did not understand what you said, please rephrase it again.
+actions:
+  - action_response_query
+  - utter_goodbye
+  - utter_greet
+  - utter_default
+  - utter_ask_rephrase
